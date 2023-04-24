@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	if (format != NULL)
 	{
 		int count = 0, i;
-		int (*m)(va_list);
+		int (*t)(va_list);
 		va_list args;
 
 		va_start(args, format);
@@ -31,9 +31,9 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
-					m = get_print(format[i + 1]);
-					if (m)
-						count += m(args);
+					t = get_print(format[i + 1]);
+					if (t)
+						count += t(args);
 					else
 						count = _putchar(format[i]) + _putchar(format[i + 1]);
 					i += 2;
