@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 
 /**
  * _print_char - prints the character c to stdout
@@ -30,7 +31,7 @@ int _print_string(va_list args)
 	char *s;
 
 	s = va_arg(args, char *);
-	if (!(s))
+	if (s == NULL)
 		s = "(null)";
 	while (str[i] != '\0')
 	{
