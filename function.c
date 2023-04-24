@@ -60,7 +60,7 @@ int _print_percent(va_list args)
 }
 /**
  * _print_int - Prints an integer
- * @arg_list: pointer
+ * @args: pointer
  *
  * Return: Number of digits
  */
