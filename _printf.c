@@ -1,36 +1,52 @@
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
+#include <stddef.h>
 /**
- * _printf - twin of printf
- * @format: character string
- *
- * Return:  the number of characters printed
+ * _printf - recreates the printf function
+ * @format: string with format specifier
+ * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	va_list arg_list;
-        int count = 0;
+	if (format != NULL)
+	{
+		int count = 0, i;
+		int (*m)(va_list);
+		va_list args;
 
-	print_type argument[] = {
-		{"c", _print_char},
-		{"s", _print_string},
-		{"%", _print_percent},
-		{"i", _print_int},
-		{"r", _print_reverse},
-		{"R", _print_rot13},
-		{"b", _print_binary},
-		{"u", _print_unsigned},
-		{"o", _print_octal},
-		{"x", _print_hex_l},
-		{"X", _print_hex_u},
-		{"d", _print_int},
-		{NULL, NULL}
-	};
-
-	va_start(arg_list, format);
-
-	count = get_print(format, argument, arg_list);
-
-	va_end(arg_list);
-
-	return (count);
+		va_start(args, format);
+		i = 0;
+		if (format[0] == '%' && format[1] == '\0')
+			return (-1);
+		while (format != NULL && format[i] != '\0')
+		{
+			if (format[i] == '%')
+			{
+				if (format[i + 1] == '%')
+				{
+					count += _putchar(format[i]);
+					i += 2;
+				}
+				else
+				{
+					m = get_func(format[i + 1]);
+					if (m)
+						count += m(args);
+					else
+						count = _putchar(format[i]) + _putchar(format[i + 1]);
+					i += 2;
+				}
+			}
+			else
+			{
+				count += _putchar(format[i]);
+				i++;
+			}
+		}
+		va_end(args);
+		return (count);
+	}
+	return (-1);
 }

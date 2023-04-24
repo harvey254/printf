@@ -8,7 +8,7 @@
  *
  * Return: number of characters printed
  */
-int get_print(const char *format, print_type argument[], va_list arg_list)
+int get_print(const char *format, print_type argument[], va_list args)
 {
 	int i, j;
 	int count = 0;

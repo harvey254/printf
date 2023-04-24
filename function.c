@@ -1,60 +1,62 @@
 #include "main.h"
-
-/**
- * _putchar - prints the character to stdout
- * @c: char value
- *
- * Return: On success 1,  -1 otherwise
- */
-
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
+#include <stdio.h>
+#include <stdarg.h>
 
 /**
  * _print_char - prints the character c to stdout
- * @ap: pointer
+ * @args: char argument
  *
- * Return: Always(1) Success
+ * Return: number of characters
  */
 
-int _print_char(va_list arg_list)
+int _print_char(va_list args)
 {
-	_putchar(va_arg(arg_list, int));
-	return (1);
+	int c;
+
+	c = va_arg(args, int);
+	return (_putchar(c));
 }
 
 /**
  * _print_string -  prints a string
- * @arg_list: pointer to string
+ * @args: pointer to string
  *
  * Return: 1
  */
 
-int _print_string(va_list arg_list)
+int _print_string(va_list args)
 {
 	int i = 0;
 	char *s;
 
-	s = va_arg(arg_list, char *);
-	if (!s)
+	s = va_arg(args, char *);
+	if (!(s))
 		s = "(null)";
-	for (i = 0; s[i]; i++)
-		_putchar(s[i]);
-	return (i);
+	while (str[i] != '\0')
+	{
+		_putchar(str[i]);
+		i++;
+		count++;
+	}
+	return (count);
 }
 
 /**
  * _print_percent - Prints percentage
- * @arg_list: pointer
+ * @args: string argument
  *
- * Return: 1
+ * Return: percentage
  */
-int _print_percent(va_list arg_list __attribute__((__unused__)))
+int _print_percent(va_list args)
 {
-	_putchar('%');
-	return (1);
+	char *p;
+
+	p = "%";
+
+	if (va_arg(args, int) == *p)
+		return (*p);
+
+	return (*p);
 }
 /**
  * _print_int - Prints an integer
@@ -63,29 +65,42 @@ int _print_percent(va_list arg_list __attribute__((__unused__)))
  * Return: Number of digits
  */
 
-int _print_int(va_list arg_list)
+int _print_int(va_list args)
 {
-	int i;
+	unsigned int abs, aux, count_num, ;
 	int count = 0;
-	int n = va_arg(arg_list, int);
+	int n = va_arg(args, int);
 
 	if (n < 0)
 	{
+		abs = (n * -1)
 		count += _putchar('-');
 	}
-	for (i = 1000000000; i > 0; i /= 10)
+	else
+		abs = n;
+
+	count_num = 1;
+	aux = abs;
+
+	while (aux > 9)
 	{
-		if (n / i)
-		{
-			if ((n / i) % 10 < 0)
-				count += _putchar(-(n / i % 10) + '0');
-			else
-				count += _putchar((n / i % 10) + '0');
-		}
-		else if (n / i == 0 && i == 1)
-		{
-			count += _putchar(n / i % 10 + '0');
-		}
+		aux / = 10;
+		count_num * = 10;
+	}
+	while (count_num >= 1)
+	{
+		count += _putchar(((abs / count_num) % 10) + '0');
+		count_num / = 10;
 	}
 	return (count);
+}
+/**
+ * print_decimal - prints decimal
+ * @args: decimal argument
+ *
+ * Return: decimal
+ */
+int _print_decimal(va_list args)
+{
+	return (_print_int(args));
 }
