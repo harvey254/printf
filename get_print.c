@@ -8,17 +8,17 @@
 int (*get_print(char c))(va_list)
 {
 	int i = 0;
-	spec arr[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"%", print_percent},
-		{"d", print_d},
-		{"i", print_i},
+	print_type arr[] = {
+		{"c", _print_char},
+		{"s", _print_sring},
+		{"%", _print_percent},
+		{"d", _print_decimal},
+		{"i", _print_int},
 		{NULL, NULL}
 	};
 	while (arr[i].valid)
 	{
-		if (x == arr[i].valid[0])
+		if (c == arr[i].valid[0])
 			return (arr[i].f);
 		i++;
 	}
