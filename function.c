@@ -27,15 +27,17 @@ int _print_char(va_list args)
 
 int _print_string(va_list args)
 {
-	int i = 0;
+	int i, count = 0;
 	char *s;
 
 	s = va_arg(args, char *);
 	if (s == NULL)
 		s = "(null)";
-	while (str[i] != '\0')
+	i = 0;
+
+	while (s[i] != '\0')
 	{
-		_putchar(str[i]);
+		_putchar(s[i]);
 		i++;
 		count++;
 	}
@@ -68,13 +70,13 @@ int _print_percent(va_list args)
 
 int _print_int(va_list args)
 {
-	unsigned int abs, aux, count_num, ;
+	unsigned int abs, aux, count_num;
 	int count = 0;
 	int n = va_arg(args, int);
 
 	if (n < 0)
 	{
-		abs = (n * -1)
+		abs = (n * -1);
 		count += _putchar('-');
 	}
 	else
@@ -85,13 +87,13 @@ int _print_int(va_list args)
 
 	while (aux > 9)
 	{
-		aux / = 10;
-		count_num * = 10;
+		aux /= 10;
+		count_num *= 10;
 	}
 	while (count_num >= 1)
 	{
 		count += _putchar(((abs / count_num) % 10) + '0');
-		count_num / = 10;
+		count_num /= 10;
 	}
 	return (count);
 }

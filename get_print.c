@@ -13,7 +13,7 @@ int (*get_print(char c))(va_list)
 	int i = 0;
 	print_type arr[] = {
 		{"c", _print_char},
-		{"s", _print_sring},
+		{"s", _print_string},
 		{"%", _print_percent},
 		{"d", _print_decimal},
 		{"i", _print_int},
