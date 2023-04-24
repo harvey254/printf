@@ -98,7 +98,7 @@ int _print_int(va_list args)
 	return (count);
 }
 /**
- * print_decimal - prints decimal
+ * _print_decimal - prints decimal
  * @args: decimal argument
  *
  * Return: decimal
