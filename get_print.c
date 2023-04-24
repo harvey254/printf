@@ -1,46 +1,26 @@
 #include "main.h"
 
 /**
- * get_print - links specifier and returns count
- * @format: a character string
- * @argument: Specifiers checked
- * @arg_list:  pointer
- *
- * Return: number of characters printed
+ * get_print - look for the specifier
+ * @c: variable to the function
+ * Return: function
  */
-int get_print(const char *format, print_type argument[], va_list args)
+int (*get_print(char c))(va_list)
 {
-	int i, j;
-	int count = 0;
-
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-
-	for (i = 0; format && format[i]; i++)
+	int i = 0;
+	spec arr[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"%", print_percent},
+		{"d", print_d},
+		{"i", print_i},
+		{NULL, NULL}
+	};
+	while (arr[i].valid)
 	{
-		if (format[i] != '%')
-		{
-			count += _putchar(format[i]);
-			continue;
-		}
-
-		for (j = 0; argument[j].parameter; j++)
-		{
-			if (*argument[j].parameter == format[i + 1])
-			{
-				count += argument[j].f(arg_list);
-				break;
-			}
-		}
-
+		if (x == arr[i].valid[0])
+			return (arr[i].f);
 		i++;
-
-		if (!argument[j].parameter)
-		{
-			count += _putchar('%');
-			count += _putchar(format[i]);
-		}
 	}
-
-	return (count);
+	return (NULL);
 }

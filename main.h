@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_h
+#ifndef _PRINTF
+#define _PRINTF
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 typedef struct print
 {
 	char *parameter;
-	int (*f)(va_list args);
+	int (*f)(va_list);
 } print_type;
 int _putchar(char c);
 int _printf(const char *format, ...);
@@ -31,6 +31,6 @@ int _print_binary(va_list args);
 int _print_hex_l(va_list args);
 int _print_hex_u(va_list args);
 char *convert(unsigned int num, int base);
-int get_print(const char *format, print_type argument[], va_list args);
+int (*get_print(char c))(va_list args);
 
 #endif
